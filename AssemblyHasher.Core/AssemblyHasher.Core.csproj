@@ -2,12 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Mysoft</Company>
+    <Authors>Caine</Authors>
+    <Description>A tool for get assembly hash.</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="..\Tools\ildasm.exe" Link="ildasm.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
