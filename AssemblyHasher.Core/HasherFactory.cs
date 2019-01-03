@@ -11,14 +11,14 @@ namespace AssemblyHasher.Core
         {
             if (File.Exists(sourcePath) == false)
             {
-                throw new FileNotFoundException(null, sourcePath);
+                throw new FileNotFoundException("File not found.", sourcePath);
             }
 
             var attrs = File.GetAttributes(sourcePath);
 
             if (attrs == FileAttributes.Directory)
             {
-                throw new ArgumentException("必须是文件", sourcePath);
+                throw new ArgumentException("Must be a file.", sourcePath);
             }
 
             var extension = Path.GetExtension(sourcePath);
