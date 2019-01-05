@@ -5,6 +5,7 @@
     <Company>Mysoft</Company>
     <Authors>Caine</Authors>
     <Description>A tool for get assembly hash.</Description>
+    <PackageTags>core assembly hash</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
