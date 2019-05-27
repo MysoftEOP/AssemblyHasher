@@ -40,6 +40,27 @@ namespace AssemblyHasher.Core
 
             return new DefaultHasher();
         }
+        
+        public string GetHash(string sourcePath, HasherEnum type = HasherEnum.None)
+        {
+            IHasher hasher;
+            switch (type)
+            {
+                case HasherEnum.None:
+                    hasher = CreateHasher(sourcePath);
+                    break;
+                case HasherEnum.Default:
+                    hasher = new DefaultHasher();
+                    break;
+                case HasherEnum.IlHasher:
+                    hasher = new IlHasher();
+                    break;
+                default:
+                    hasher = new DefaultHasher();
+                    break;
+            }
+            return hasher.GetHash(sourcePath);
+        }
 
         private static bool IsCliAssembly(string sourcePath)
         {
