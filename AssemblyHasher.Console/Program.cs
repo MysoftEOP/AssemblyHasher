@@ -9,21 +9,33 @@ namespace AssemblyHasher.Console
         {
             //System.Console.WriteLine("Hello World!");
 
-            var path = @"E:\FileClientAPI\2\myDoc.ApiClient.dll";
+            //var path = @"E:\FileClientAPI\2\myDoc.ApiClient.dll";
 
-            var factory = HasherFactory.CreateHasher(path);
+            //var factory = HasherFactory.CreateHasher(path);
 
-            var md5 = factory.GetHash(path);
+            //var md5 = factory.GetHash(path);
+
+            //System.Console.WriteLine(md5);
+
+            var path = @"E:\test\AssemblyHasher.Core.dll";
+
+            //factory = HasherFactory.CreateHasher(path);
+
+            //md5 = factory.GetHash(path);
+
+            //System.Console.WriteLine(md5);
+
+            var md5 = HasherFactory.GetHash(path);
 
             System.Console.WriteLine(md5);
 
-            path = @"E:\myDoc.ApiClient.dll";
+            var md5default = HasherFactory.GetHash(path,HasherEnum.Default);
 
-            factory = HasherFactory.CreateHasher(path);
+            System.Console.WriteLine(md5default);
 
-            md5 = factory.GetHash(path);
+            var md5lhasher = HasherFactory.GetHash(path, HasherEnum.IlHasher);
 
-            System.Console.WriteLine(md5);
+            System.Console.WriteLine(md5lhasher);
 
             System.Console.ReadKey();
         }

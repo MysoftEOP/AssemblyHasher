@@ -41,7 +41,7 @@ namespace AssemblyHasher.Core
             return new DefaultHasher();
         }
         
-        public string GetHash(string sourcePath, HasherEnum type = HasherEnum.None)
+        public static string GetHash(string sourcePath, HasherEnum type = HasherEnum.None)
         {
             IHasher hasher;
             switch (type)
