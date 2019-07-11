@@ -40,7 +40,10 @@ namespace AssemblyHasher.Core
 
             return new DefaultHasher();
         }
+
         
+
+
         public static string GetHash(string sourcePath, HasherEnum type = HasherEnum.None)
         {
             IHasher hasher;
@@ -53,13 +56,49 @@ namespace AssemblyHasher.Core
                     hasher = new DefaultHasher();
                     break;
                 case HasherEnum.IlHasher:
-                    hasher = new IlHasher();
+                    if (IsIlHasherFile(sourcePath))
+                    {
+                        hasher = new IlHasher();
+                    }
+                    else
+                    {
+                        hasher = new DefaultHasher();
+                    }
                     break;
                 default:
                     hasher = new DefaultHasher();
                     break;
             }
             return hasher.GetHash(sourcePath);
+        }
+
+        private static bool IsIlHasherFile(string sourcePath)
+        {
+            if (File.Exists(sourcePath) == false)
+            {
+                throw new FileNotFoundException("File not found.", sourcePath);
+            }
+            var attrs = File.GetAttributes(sourcePath);
+            if (attrs == FileAttributes.Directory)
+            {
+                throw new ArgumentException("Must be a file.", sourcePath);
+            }
+            var extension = Path.GetExtension(sourcePath);
+            if (".dll".Equals(extension, StringComparison.OrdinalIgnoreCase) || ".exe".Equals(extension, StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    if (IsCliAssembly(sourcePath))
+                    {
+                        return true;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return false;
         }
 
         private static bool IsCliAssembly(string sourcePath)
